@@ -1,6 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .main-box {
@@ -8,6 +9,17 @@ body {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
+}
+
+.display-box {
+  height: 80px;
+  flex-grow: 0;
+  border: 1px solid blue;
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  padding: 20px;
+  font-size: 30px;
 }
 
 .inputs-box {
