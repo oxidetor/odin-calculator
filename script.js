@@ -29,8 +29,7 @@ digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
 function onDigitClick(e) {
   updateOperand(e.target.textContent);
-  displayOperation();
-  console.table(operation);
+  updateDisplay("operation");
 }
 
 function updateOperand(digit) {
@@ -50,12 +49,11 @@ function onOperatorClick(e) {
   if (operation.right != "") onEqualsClick();
 
   updateOperator(e.target.textContent);
-  displayOperation();
-
-  console.table(operation);
+  updateDisplay("operation");
 }
 
 function updateOperator(operator) {
+  // Switch current operand from left to right
   operation.current = "right";
   operation.operator = operator;
 }
@@ -64,40 +62,41 @@ let equals = document.querySelector(".equals");
 equals.addEventListener("click", onEqualsClick);
 
 function onEqualsClick() {
+  // Execute only if both operands are set
   if (operation.left != "" && operation.right != "") {
     result = operation.operate();
-    displayResult(result);
+    resetOperation();
     operation.left = `${result}`;
-    operation.right = "";
-    operation.current = "left";
-    operation.operator = null;
+    updateDisplay("result");
   }
-  console.table(operation);
 }
 
-function displayResult() {
+function updateDisplay(mode) {
   let displayBox = document.querySelector(".display-box");
-  displayBox.textContent = result;
-}
-
-function displayOperation() {
-  let displayBox = document.querySelector(".display-box");
-  displayBox.textContent = `${operation.left}${
-    operation.operator != null ? " " + operation.operator + " " : ""
-  }${operation.right != "" ? " " + operation.right + " " : ""}`;
+  let left = operation.left;
+  let right = operation.right;
+  let operator = operation.operator;
+  if (mode == "operation") {
+    displayBox.textContent = `${left}${operator ? " " + operator + " " : ""}${
+      right ? " " + right + " " : ""
+    }`;
+  }
+  if (mode == "result") {
+    displayBox.textContent = left;
+  }
+  if (mode == "clear") {
+    displayBox.textContent = "";
+  }
 }
 
 let clear = document.querySelector(".clear");
-clear.addEventListener("click", onClearClick);
+clear.addEventListener("click", resetOperation);
 
-function onClearClick(e) {
+function resetOperation() {
   operation.left = "";
   operation.current = "left";
   operation.operator = null;
   operation.right = "";
 
-  let displayBox = document.querySelector(".display-box");
-  displayBox.textContent = "";
-
-  console.table(operation);
+  updateDisplay("clear");
 }
