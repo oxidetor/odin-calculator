@@ -29,16 +29,14 @@ digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
 function onDigitClick(e) {
   let digit = e.target.textContent;
-  console.log(digit);
 
-  if (operation.current == "left") {
-    operation.left += digit;
-  } else {
-    operation.right += digit;
-  }
-
+  updateOperand(digit);
   displayOperation();
   console.table(operation);
+}
+
+function updateOperand(digit) {
+  operation[operation.current] += digit;
 }
 
 let operators = document.querySelectorAll(".operator");
@@ -76,7 +74,7 @@ function onEqualsClick() {
 
 function displayResult() {
   let displayBox = document.querySelector(".display-box");
-  displayBox.textContent = result.toFixed(6);
+  displayBox.textContent = result;
 }
 
 function displayOperation() {
