@@ -1,0 +1,60 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-box {
+  margin: auto;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs-box {
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+}
+
+.digits-box {
+  width: 120px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row-reverse wrap;
+  justify-content: flex-end;
+}
+
+.digit {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  border: 1px solid purple;
+  box-sizing: border-box;
+}
+
+.operators-box {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.operator {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  border: 1px solid purple;
+  box-sizing: border-box;
+}
+
+.actions-box {
+  border: 1px solid blue;
+  display: flex;
+}
+
+.equals {
+  height: 40px;
+  width: 80px;
+  margin: auto;
+  box-sizing: border-box;
+  border: 1px solid green;
+}
