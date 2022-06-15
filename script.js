@@ -28,3 +28,21 @@ function operate(operator, a, b) {
       break;
   }
 }
+
+let digits = document.querySelectorAll(".digit");
+let displayedValues = [];
+
+digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
+
+function onDigitClick(e) {
+  let digit = e.target.textContent;
+  console.log(e.target.textContent);
+  displayDigit(digit);
+  displayedValues.push(digit);
+  console.log(displayedValues);
+}
+
+function displayDigit(digit) {
+  let displayBox = document.querySelector(".display-box");
+  displayBox.textContent += digit;
+}
