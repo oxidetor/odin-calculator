@@ -4,20 +4,20 @@ let multiply = (a, b) => a * b;
 let divide = (a, b) => a / b;
 
 let operation = {
-  current_operand: "left",
-  left_operand: "",
+  current: "left",
+  left: "",
   operator: null,
-  right_operand: "",
+  right: "",
   operate() {
     switch (this.operator) {
       case "+":
-        return add(+this.left_operand, +this.right_operand);
+        return add(+this.left, +this.right);
       case "-":
-        return subtract(+this.left_operand, +this.right_operand);
+        return subtract(+this.left, +this.right);
       case "*":
-        return multiply(+this.left_operand, +this.right_operand);
+        return multiply(+this.left, +this.right);
       case "/":
-        return divide(+this.left_operand, +this.right_operand);
+        return divide(+this.left, +this.right);
       default:
         break;
     }
@@ -31,10 +31,10 @@ function onDigitClick(e) {
   let digit = e.target.textContent;
   console.log(digit);
 
-  if (operation.current_operand == "left") {
-    operation.left_operand += digit;
+  if (operation.current == "left") {
+    operation.left += digit;
   } else {
-    operation.right_operand += digit;
+    operation.right += digit;
   }
 
   displayOperation();
@@ -49,10 +49,10 @@ operators.forEach((operator) =>
 function onOperatorClick(e) {
   let operator = e.target.textContent;
 
-  if (operation.left_operand == "") return;
+  if (operation.left == "") return;
 
-  if (operation.right_operand != "") onEqualsClick();
-  operation.current_operand = "right";
+  if (operation.right != "") onEqualsClick();
+  operation.current = "right";
   operation.operator = operator;
 
   displayOperation();
@@ -64,36 +64,36 @@ let equals = document.querySelector(".equals");
 equals.addEventListener("click", onEqualsClick);
 
 function onEqualsClick() {
-  if (operation.left_operand != "" && operation.right_operand != "") {
+  if (operation.left != "" && operation.right != "") {
     result = operation.operate();
     displayResult(result);
-    operation.left_operand = `${result}`;
-    operation.right_operand = "";
-    operation.current_operand = "left";
+    operation.left = `${result}`;
+    operation.right = "";
+    operation.current = "left";
   }
   console.table(operation);
 }
 
 function displayResult() {
   let displayBox = document.querySelector(".display-box");
-  displayBox.textContent = result;
+  displayBox.textContent = result.toFixed(6);
 }
 
 function displayOperation() {
   let displayBox = document.querySelector(".display-box");
-  displayBox.textContent = `${operation.left_operand}${
+  displayBox.textContent = `${operation.left}${
     operation.operator != null ? " " + operation.operator + " " : ""
-  }${operation.right_operand != "" ? " " + operation.right_operand + " " : ""}`;
+  }${operation.right != "" ? " " + operation.right + " " : ""}`;
 }
 
 let clear = document.querySelector(".clear");
 clear.addEventListener("click", onClearClick);
 
 function onClearClick(e) {
-  operation.left_operand = "";
-  operation.current_operand = "left";
+  operation.left = "";
+  operation.current = "left";
   operation.operator = null;
-  operation.right_operand = "";
+  operation.right = "";
 
   let displayBox = document.querySelector(".display-box");
   displayBox.textContent = "";
