@@ -28,9 +28,7 @@ let digits = document.querySelectorAll(".digit");
 digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
 function onDigitClick(e) {
-  let digit = e.target.textContent;
-
-  updateOperand(digit);
+  updateOperand(e.target.textContent);
   displayOperation();
   console.table(operation);
 }
@@ -45,17 +43,21 @@ operators.forEach((operator) =>
 );
 
 function onOperatorClick(e) {
-  let operator = e.target.textContent;
-
+  // Do nothing if the left operand isn't set
   if (operation.left == "") return;
 
+  // Calculate the result if the right operand is already set
   if (operation.right != "") onEqualsClick();
-  operation.current = "right";
-  operation.operator = operator;
 
+  updateOperator(e.target.textContent);
   displayOperation();
 
   console.table(operation);
+}
+
+function updateOperator(operator) {
+  operation.current = "right";
+  operation.operator = operator;
 }
 
 let equals = document.querySelector(".equals");
@@ -68,6 +70,7 @@ function onEqualsClick() {
     operation.left = `${result}`;
     operation.right = "";
     operation.current = "left";
+    operation.operator = null;
   }
   console.table(operation);
 }
