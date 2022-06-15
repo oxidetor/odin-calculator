@@ -70,3 +70,12 @@ body {
   box-sizing: border-box;
   border: 1px solid green;
 }
+
+.clear {
+  height: 40px;
+  width: 40px;
+  margin: auto;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid green;
+}
