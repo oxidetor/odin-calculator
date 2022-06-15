@@ -14,32 +14,59 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(operator, a, b) {
-  switch (operator) {
-    case "+":
-      return add(a, b);
-    case "-":
-      return subtract(a, b);
-    case "*":
-      return multiply(a, b);
-    case "/":
-      return divide(a, b);
-    default:
-      break;
-  }
-}
+let operation = {
+  current_operand: "left",
+  left_operand: "",
+  operator: null,
+  right_operand: "",
+  operate() {
+    switch (this.operator) {
+      case "+":
+        return add(this.left_operand, this.right_operand);
+      case "-":
+        return subtract(this.left_operand, this.right_operand);
+      case "*":
+        return multiply(this.left_operand, this.right_operand);
+      case "/":
+        return divide(this.left_operand, this.right_operand);
+      default:
+        break;
+    }
+  },
+};
 
 let digits = document.querySelectorAll(".digit");
-let displayedValues = [];
-
 digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
 function onDigitClick(e) {
   let digit = e.target.textContent;
-  console.log(e.target.textContent);
+  console.log(digit);
   displayDigit(digit);
-  displayedValues.push(digit);
-  console.log(displayedValues);
+
+  if (operation.current_operand == "left") {
+    operation.left_operand += digit;
+  } else {
+    operation.right_operand += digit;
+  }
+
+  console.table(operation);
+}
+
+let operators = document.querySelectorAll(".operator");
+operators.forEach((operator) =>
+  operator.addEventListener("click", onOperatorClick)
+);
+
+function onOperatorClick(e) {
+  let operator = e.target.textContent;
+
+  if (operation.left_operand == "") return;
+  operation.current_operand = "right";
+  operation.operator = operator;
+
+  displayDigit(` ${operator} `);
+
+  console.table(operation);
 }
 
 function displayDigit(digit) {
