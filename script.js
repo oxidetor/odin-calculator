@@ -29,7 +29,7 @@ digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
 function onDigitClick(e) {
   updateOperand(e.target.textContent);
-  updateDisplay("operation");
+  updateDisplay();
 }
 
 function updateOperand(digit) {
@@ -49,7 +49,7 @@ function onOperatorClick(e) {
   if (operation.right != "") onEqualsClick();
 
   updateOperator(e.target.textContent);
-  updateDisplay("operation");
+  updateDisplay();
 }
 
 function updateOperator(operator) {
@@ -67,36 +67,32 @@ function onEqualsClick() {
     result = operation.operate();
     resetOperation();
     operation.left = `${result}`;
-    updateDisplay("result");
+    updateDisplay();
   }
 }
 
 function updateDisplay(mode) {
   let displayBox = document.querySelector(".display-box");
-  let left = operation.left;
-  let right = operation.right;
-  let operator = operation.operator;
-  if (mode == "operation") {
-    displayBox.textContent = `${left}${operator ? " " + operator + " " : ""}${
-      right ? " " + right + " " : ""
-    }`;
-  }
-  if (mode == "result") {
-    displayBox.textContent = left;
-  }
-  if (mode == "clear") {
-    displayBox.textContent = "";
-  }
+
+  displayBox.textContent =
+    mode == "clear"
+      ? ""
+      : `${operation.left}${
+          operation.operator ? " " + operation.operator + " " : ""
+        }${operation.right ? " " + operation.right + " " : ""}`;
 }
 
 let clear = document.querySelector(".clear");
-clear.addEventListener("click", resetOperation);
+clear.addEventListener("click", onClearClick);
+
+function onClearClick() {
+  resetOperation();
+  updateDisplay("clear");
+}
 
 function resetOperation() {
   operation.left = "";
+  operation.right = "";
   operation.current = "left";
   operation.operator = null;
-  operation.right = "";
-
-  updateDisplay("clear");
 }
