@@ -13,8 +13,8 @@ body {
 }
 
 .display-box {
-  height: 50px;
-  width: 170px;
+  height: 70px;
+  width: 200px;
   flex-grow: 0;
   border: 1px solid blue;
   display: flex;
@@ -23,6 +23,7 @@ body {
   padding: 20px;
   font-size: 30px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .inputs-box {
@@ -31,20 +32,49 @@ body {
 }
 
 .digits-box {
-  width: 120px;
+  width: 150px;
   box-sizing: border-box;
   display: flex;
   flex-flow: row-reverse wrap;
   justify-content: space-between;
 }
 
-.digit {
-  height: 40px;
-  width: 40px;
+.digit,
+.operator,
+.backspace,
+.equals,
+.clear {
+  height: 50px;
+  width: 50px;
   text-align: center;
-  line-height: 40px;
+  line-height: 44px;
   border: 1px solid purple;
   box-sizing: border-box;
+  padding: 3px;
+  background-clip: content-box;
+}
+
+.digit {
+  background-color: rgb(171, 186, 202);
+}
+.equals {
+  background-color: lightseagreen;
+}
+
+.backspace {
+  background-color: rgb(254, 254, 178);
+}
+
+.clear {
+  background-color: lightsalmon;
+}
+
+.operator {
+  background-color: lightskyblue;
+}
+
+#digit0 {
+  width: 100px;
 }
 
 .operators-box {
@@ -52,48 +82,10 @@ body {
   flex-direction: column;
 }
 
-.operator {
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  line-height: 40px;
-
-  border: 1px solid purple;
-  box-sizing: border-box;
-}
-
 .actions-box {
   display: flex;
 }
 
-.backspace {
-  height: 40px;
-  width: 40px;
-  margin: auto;
-  text-align: center;
-  line-height: 40px;
-
-  box-sizing: border-box;
-  border: 1px solid green;
-}
-
 .equals {
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  width: 80px;
-  margin: auto;
-  box-sizing: border-box;
-  border: 1px solid green;
-}
-
-.clear {
-  height: 40px;
-  width: 40px;
-  margin: auto;
-  text-align: center;
-  line-height: 40px;
-
-  box-sizing: border-box;
-  border: 1px solid green;
+  width: 100px;
 }

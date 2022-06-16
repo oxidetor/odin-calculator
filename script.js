@@ -81,14 +81,16 @@ function styleOperatorButton(e) {
   operators.forEach((operator) => {
     console.log(operator.textContent);
     if (operator.textContent == operation.operator) {
-      operator.style.backgroundColor = "red";
+      operator.style.backgroundColor = "aqua";
     }
   });
 }
 
 function resetOperatorButtonStyles() {
   let operators = document.querySelectorAll(".operator");
-  operators.forEach((operator) => (operator.style.backgroundColor = "white"));
+  operators.forEach(
+    (operator) => (operator.style.backgroundColor = "lightskyblue")
+  );
 }
 
 function updateOperator(operator) {
@@ -103,7 +105,7 @@ function onEqualsClick() {
     result = operation.operate();
     resetOperation();
     resetOperatorButtonStyles();
-    operation.left = `${result == Infinity ? "DIV BY 0 ERROR" : result}`;
+    operation.left = `${result == Infinity ? "*ERROR*" : result}`;
     updateDisplay();
   }
 }
@@ -121,11 +123,7 @@ function updateDisplay(mode) {
   let output = operation[operation.current];
 
   displayBox.textContent =
-    mode == "clear"
-      ? ""
-      : output.slice(-5) == "ERROR"
-      ? output
-      : `${output.length > 12 ? "TOO LARGE" : output}`;
+    mode == "clear" ? "" : `${output.length > 9 ? "*ERROR*" : output}`;
 }
 
 function onClearClick() {
