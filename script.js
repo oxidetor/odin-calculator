@@ -3,7 +3,7 @@ let subtract = (a, b) => a - b;
 let multiply = (a, b) => a * b;
 let divide = (a, b) => a / b;
 
-let operation = {
+const operation = {
   current: "left",
   left: "",
   operator: null,
@@ -33,6 +33,10 @@ function onDigitClick(e) {
 }
 
 function updateOperand(digit) {
+  // Allow only one decimal point in an operand
+  if (digit == ".") {
+    if (operation[operation.current].includes(".")) return;
+  }
   operation[operation.current] += digit;
 }
 
@@ -85,8 +89,9 @@ function onEqualsClick() {
 
 function updateDisplay(mode) {
   let displayBox = document.querySelector(".display-box");
+  let output = operation[operation.current];
   displayBox.textContent =
-    mode == "clear" ? "" : `${operation[operation.current]}`;
+    mode == "clear" ? "" : `${output.length > 9 ? "TOO LARGE" : output}`;
 }
 
 let clear = document.querySelector(".clear");

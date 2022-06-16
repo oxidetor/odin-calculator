@@ -13,8 +13,8 @@ body {
 }
 
 .display-box {
-  height: 80px;
-  width: 120px;
+  height: 50px;
+  width: 170px;
   flex-grow: 0;
   border: 1px solid blue;
   display: flex;
@@ -36,7 +36,7 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-flow: row-reverse wrap;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .digit {
