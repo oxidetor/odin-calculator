@@ -30,6 +30,7 @@ body {
   padding: 20px;
   font-size: 30px;
   overflow: hidden;
+  transition: all 0.2s ease;
   box-sizing: border-box;
 }
 

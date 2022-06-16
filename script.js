@@ -7,6 +7,7 @@ function init() {
   let backspace = document.querySelector(".backspace");
   let equals = document.querySelector(".equals");
   let clear = document.querySelector(".clear");
+  let displayBox = document.querySelector(".display-box");
 
   digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
@@ -29,6 +30,10 @@ function init() {
     button.addEventListener("transitionend", (e) =>
       e.target.classList.remove("pressed")
     )
+  );
+
+  displayBox.addEventListener("transitionend", (e) =>
+    e.target.classList.remove("pressed")
   );
 }
 
@@ -112,12 +117,15 @@ function updateOperator(operator) {
 }
 
 function onEqualsClick() {
+  let displayBox = document.querySelector(".display-box");
+
   // Execute only if both operands are set
   if (operation.left != "" && operation.right != "") {
     result = operation.operate();
     resetOperation();
     resetOperatorButtonStyles();
     operation.left = `${result == Infinity ? "*ERROR*" : result}`;
+    displayBox.classList.add("pressed");
     updateDisplay();
   }
 }
