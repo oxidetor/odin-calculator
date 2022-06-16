@@ -26,7 +26,6 @@ body {
 }
 
 .inputs-box {
-  border: 1px solid blue;
   display: flex;
   flex-direction: row;
 }
@@ -43,12 +42,12 @@ body {
   height: 40px;
   width: 40px;
   text-align: center;
+  line-height: 40px;
   border: 1px solid purple;
   box-sizing: border-box;
 }
 
 .operators-box {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
 }
@@ -57,17 +56,31 @@ body {
   height: 40px;
   width: 40px;
   text-align: center;
+  line-height: 40px;
+
   border: 1px solid purple;
   box-sizing: border-box;
 }
 
 .actions-box {
-  border: 1px solid blue;
   display: flex;
+}
+
+.delete {
+  height: 40px;
+  width: 40px;
+  margin: auto;
+  text-align: center;
+  line-height: 40px;
+
+  box-sizing: border-box;
+  border: 1px solid green;
 }
 
 .equals {
   height: 40px;
+  line-height: 40px;
+  text-align: center;
   width: 80px;
   margin: auto;
   box-sizing: border-box;
@@ -79,6 +92,8 @@ body {
   width: 40px;
   margin: auto;
   text-align: center;
+  line-height: 40px;
+
   box-sizing: border-box;
   border: 1px solid green;
 }
