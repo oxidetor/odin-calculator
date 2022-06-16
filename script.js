@@ -1,3 +1,26 @@
+window.onload = init;
+
+function init() {
+  let digits = document.querySelectorAll(".digit");
+  digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
+
+  let operators = document.querySelectorAll(".operator");
+  operators.forEach((operator) =>
+    operator.addEventListener("click", onOperatorClick)
+  );
+
+  let del = document.querySelector(".delete");
+  del.addEventListener("click", onDeleteClick);
+
+  let equals = document.querySelector(".equals");
+  equals.addEventListener("click", onEqualsClick);
+
+  let clear = document.querySelector(".clear");
+  clear.addEventListener("click", onClearClick);
+
+  window.addEventListener("keydown", onKeyboardInput);
+}
+
 let add = (a, b) => a + b;
 let subtract = (a, b) => a - b;
 let multiply = (a, b) => a * b;
@@ -24,9 +47,6 @@ const operation = {
   },
 };
 
-let digits = document.querySelectorAll(".digit");
-digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
-
 function onDigitClick(e) {
   updateOperand(e.target.textContent);
   updateDisplay();
@@ -39,11 +59,6 @@ function updateOperand(digit) {
   }
   operation[operation.current] += digit;
 }
-
-let operators = document.querySelectorAll(".operator");
-operators.forEach((operator) =>
-  operator.addEventListener("click", onOperatorClick)
-);
 
 function onOperatorClick(e) {
   let operator = e.type == "keydown" ? e.key : e.target.textContent;
@@ -80,9 +95,6 @@ function updateOperator(operator) {
   operation.operator = operator;
 }
 
-let equals = document.querySelector(".equals");
-equals.addEventListener("click", onEqualsClick);
-
 function onEqualsClick() {
   // Execute only if both operands are set
   if (operation.left != "" && operation.right != "") {
@@ -93,9 +105,6 @@ function onEqualsClick() {
     updateDisplay();
   }
 }
-
-let del = document.querySelector(".delete");
-del.addEventListener("click", onDeleteClick);
 
 function onDeleteClick(e) {
   // Do nothing if only left and operator are set
@@ -117,9 +126,6 @@ function updateDisplay(mode) {
       : `${output.length > 12 ? "TOO LARGE" : output}`;
 }
 
-let clear = document.querySelector(".clear");
-clear.addEventListener("click", onClearClick);
-
 function onClearClick() {
   resetOperation();
   resetOperatorButtonStyles();
@@ -132,8 +138,6 @@ function resetOperation() {
   operation.current = "left";
   operation.operator = null;
 }
-
-window.addEventListener("keydown", onKeyboardInput);
 
 function onKeyboardInput(e) {
   let operators = ["/", "*", "+", "-"];
