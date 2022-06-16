@@ -1,24 +1,35 @@
 window.onload = init;
 
 function init() {
+  let buttons = document.querySelectorAll(".button");
   let digits = document.querySelectorAll(".digit");
+  let operators = document.querySelectorAll(".operator");
+  let backspace = document.querySelector(".backspace");
+  let equals = document.querySelector(".equals");
+  let clear = document.querySelector(".clear");
+
   digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
-  let operators = document.querySelectorAll(".operator");
   operators.forEach((operator) =>
     operator.addEventListener("click", onOperatorClick)
   );
 
-  let backspace = document.querySelector(".backspace");
   backspace.addEventListener("click", onBackspaceClick);
 
-  let equals = document.querySelector(".equals");
   equals.addEventListener("click", onEqualsClick);
 
-  let clear = document.querySelector(".clear");
   clear.addEventListener("click", onClearClick);
 
   window.addEventListener("keydown", onKeyboardInput);
+
+  buttons.forEach((button) =>
+    button.addEventListener("click", (e) => e.target.classList.add("pressed"))
+  );
+  buttons.forEach((button) =>
+    button.addEventListener("transitionend", (e) =>
+      e.target.classList.remove("pressed")
+    )
+  );
 }
 
 let add = (a, b) => a + b;

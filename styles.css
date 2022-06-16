@@ -46,11 +46,7 @@ body {
   justify-content: space-between;
 }
 
-.digit,
-.operator,
-.backspace,
-.equals,
-.clear {
+.button {
   height: 50px;
   width: 50px;
   text-align: center;
@@ -59,6 +55,13 @@ body {
   box-sizing: border-box;
   padding: 3px;
   background-clip: content-box;
+  transition: all 0.2s ease;
+}
+
+.pressed {
+  transform: scale(1.1);
+  border-color: purple;
+  box-shadow: 0 0 0.2rem purple;
 }
 
 .digit {
