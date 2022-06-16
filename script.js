@@ -73,13 +73,8 @@ function onEqualsClick() {
 
 function updateDisplay(mode) {
   let displayBox = document.querySelector(".display-box");
-
   displayBox.textContent =
-    mode == "clear"
-      ? ""
-      : `${operation.left}${
-          operation.operator ? " " + operation.operator + " " : ""
-        }${operation.right ? " " + operation.right + " " : ""}`;
+    mode == "clear" ? "" : `${operation[operation.current]}`;
 }
 
 let clear = document.querySelector(".clear");
