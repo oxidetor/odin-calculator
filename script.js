@@ -124,7 +124,29 @@ function onEqualsClick() {
     result = operation.operate();
     resetOperation();
     resetOperatorButtonStyles();
-    operation.left = `${result == Infinity ? "*ERROR*" : result}`;
+
+    if (result == Infinity || result == -Infinity) {
+      operation.left = "*ERROR";
+    }
+    if (result.toString().length > 9) {
+      console.log("length greater than 9");
+      if (result.toPrecision(8).includes("e+")) {
+        console.log("includes e+");
+        console.log(
+          result.toPrecision(8).length - result.toPrecision(8).indexOf("+")
+        );
+        operation.left = `${result.toPrecision(
+          7 -
+            (result.toPrecision(8).length - result.toPrecision(8).indexOf("+"))
+        )}`;
+      } else {
+        console.log("includes decimal point");
+        operation.left = `${result.toPrecision(8)}`;
+      }
+    } else {
+      console.log("length <= 7");
+      operation.left = `${result}`;
+    }
     displayBox.classList.add("pressed");
     updateDisplay();
   }
@@ -133,6 +155,11 @@ function onEqualsClick() {
 function onBackspaceClick() {
   // Do nothing if only left and operator are set
   if (operation.operator == null || operation.right != "") {
+    // Backspace removes entire exponentiation term ("e+X")
+    if (operation[operation.current].slice(-2, -1) == "+") {
+      operation[operation.current] = operation[operation.current].slice(0, -3);
+    }
+
     operation[operation.current] = operation[operation.current].slice(0, -1);
     updateDisplay();
   }
@@ -142,8 +169,7 @@ function updateDisplay(mode) {
   let displayBox = document.querySelector(".display-box");
   let output = operation[operation.current];
 
-  displayBox.textContent =
-    mode == "clear" ? "" : `${output.length > 9 ? "*ERROR*" : output}`;
+  displayBox.textContent = mode == "clear" ? "" : `${output}`;
 }
 
 function onClearClick() {
