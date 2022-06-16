@@ -46,19 +46,27 @@ operators.forEach((operator) =>
 );
 
 function onOperatorClick(e) {
+  let operator = e.type == "keydown" ? e.key : e.target.textContent;
+
   // Do nothing if the left operand isn't set
   if (operation.left == "") return;
 
   // Calculate the result if the right operand is already set
   if (operation.right != "") onEqualsClick();
 
-  updateOperator(e.target.textContent);
+  updateOperator(operator);
   resetOperatorButtonStyles();
-  styleOperatorButton(e);
+  styleOperatorButton();
 }
 
 function styleOperatorButton(e) {
-  e.target.style.backgroundColor = "red";
+  let operators = document.querySelectorAll(".operator");
+  operators.forEach((operator) => {
+    console.log(operator.textContent);
+    if (operator.textContent == operation.operator) {
+      operator.style.backgroundColor = "red";
+    }
+  });
 }
 
 function resetOperatorButtonStyles() {
@@ -123,4 +131,16 @@ function resetOperation() {
   operation.right = "";
   operation.current = "left";
   operation.operator = null;
+}
+
+window.addEventListener("keydown", onKeyboardInput);
+
+function onKeyboardInput(e) {
+  let operators = ["/", "*", "+", "-"];
+  console.log(e.type == "keydown");
+  console.log(e.key);
+  if (operators.includes(e.key)) {
+    console.log("found");
+    onOperatorClick(e);
+  }
 }
