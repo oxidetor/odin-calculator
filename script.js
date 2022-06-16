@@ -49,9 +49,10 @@ const operation = {
 
 function onDigitClick(e) {
   let digit = e.type == "keydown" ? e.key : e.target.textContent;
-
-  updateOperand(digit);
-  updateDisplay();
+  if (operation[operation.current].length < 9) {
+    updateOperand(digit);
+    updateDisplay();
+  }
 }
 
 function updateOperand(digit) {
