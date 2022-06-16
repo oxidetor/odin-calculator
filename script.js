@@ -129,22 +129,17 @@ function onEqualsClick() {
       operation.left = "*ERROR";
     }
     if (result.toString().length > 9) {
-      console.log("length greater than 9");
-      if (result.toPrecision(8).includes("e+")) {
-        console.log("includes e+");
-        console.log(
-          result.toPrecision(8).length - result.toPrecision(8).indexOf("+")
-        );
-        operation.left = `${result.toPrecision(
-          7 -
-            (result.toPrecision(8).length - result.toPrecision(8).indexOf("+"))
-        )}`;
-      } else {
-        console.log("includes decimal point");
-        operation.left = `${result.toPrecision(8)}`;
+      let precision = 9;
+      if (result.toPrecision(precision).includes("-")) precision--;
+      if (result.toPrecision(precision).includes(".")) precision--;
+      if (result.toPrecision(precision).includes("e+")) {
+        precision =
+          --precision -
+          (result.toPrecision(precision).length -
+            result.toPrecision(precision).indexOf("+"));
       }
+      operation.left = `${result.toPrecision(precision)}`;
     } else {
-      console.log("length <= 7");
       operation.left = `${result}`;
     }
     displayBox.classList.add("pressed");
