@@ -108,7 +108,7 @@ function onEqualsClick() {
   }
 }
 
-function onBackspaceClick(e) {
+function onBackspaceClick() {
   // Do nothing if only left and operator are set
   if (operation.operator == null || operation.right != "") {
     operation[operation.current] = operation[operation.current].slice(0, -1);
@@ -144,10 +144,10 @@ function resetOperation() {
 function onKeyboardInput(e) {
   let operators = ["/", "*", "+", "-"];
   let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
-  console.log(e.type == "keydown");
-  console.log(e.key);
+
   if (operators.includes(e.key)) onOperatorClick(e);
   if (digits.includes(e.key)) onDigitClick(e);
-  // if (e.key == "Backspace") onBackspaceClick(e);
-  // if (e.key == "Delete") onClearClick(e);
+  if (e.key == "Backspace") onBackspaceClick(e);
+  if (e.key == "Enter") onEqualsClick(e);
+  if (e.key == "Delete") onClearClick(e);
 }
