@@ -49,7 +49,18 @@ function onOperatorClick(e) {
   if (operation.right != "") onEqualsClick();
 
   updateOperator(e.target.textContent);
-  updateDisplay();
+  resetOperatorButtonStyles();
+  styleOperatorButton(e);
+  // e.target.style.backgroundColor = "red";
+}
+
+function styleOperatorButton(e) {
+  e.target.style.backgroundColor = "red";
+}
+
+function resetOperatorButtonStyles() {
+  let operators = document.querySelectorAll(".operator");
+  operators.forEach((operator) => (operator.style.backgroundColor = "white"));
 }
 
 function updateOperator(operator) {
@@ -66,6 +77,7 @@ function onEqualsClick() {
   if (operation.left != "" && operation.right != "") {
     result = operation.operate();
     resetOperation();
+    resetOperatorButtonStyles();
     operation.left = `${result}`;
     updateDisplay();
   }
@@ -82,6 +94,7 @@ clear.addEventListener("click", onClearClick);
 
 function onClearClick() {
   resetOperation();
+  resetOperatorButtonStyles();
   updateDisplay("clear");
 }
 
