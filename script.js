@@ -86,6 +86,17 @@ function onEqualsClick() {
   }
 }
 
+let del = document.querySelector(".delete");
+del.addEventListener("click", onDeleteClick);
+
+function onDeleteClick(e) {
+  // Do nothing if only left and operator are set
+  if (operation.operator == null || operation.right != "") {
+    operation[operation.current] = operation[operation.current].slice(0, -1);
+    updateDisplay();
+  }
+}
+
 function updateDisplay(mode) {
   let displayBox = document.querySelector(".display-box");
   let output = operation[operation.current];
