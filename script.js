@@ -10,7 +10,7 @@ function init() {
   );
 
   let backspace = document.querySelector(".backspace");
-  del.addEventListener("click", onBackspaceClick);
+  backspace.addEventListener("click", onBackspaceClick);
 
   let equals = document.querySelector(".equals");
   equals.addEventListener("click", onEqualsClick);
@@ -48,7 +48,9 @@ const operation = {
 };
 
 function onDigitClick(e) {
-  updateOperand(e.target.textContent);
+  let digit = e.type == "keydown" ? e.key : e.target.textContent;
+
+  updateOperand(digit);
   updateDisplay();
 }
 
@@ -146,6 +148,6 @@ function onKeyboardInput(e) {
   console.log(e.key);
   if (operators.includes(e.key)) onOperatorClick(e);
   if (digits.includes(e.key)) onDigitClick(e);
-  if (e.key == "Backspace") onBackspaceClick(e);
-  if (e.key == "Delete") onClearClick(e);
+  // if (e.key == "Backspace") onBackspaceClick(e);
+  // if (e.key == "Delete") onClearClick(e);
 }
