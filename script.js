@@ -9,6 +9,8 @@ function init() {
   let clear = document.querySelector(".clear");
   let displayBox = document.querySelector(".display-box");
 
+  displayBox.textContent = "HELLO";
+
   digits.forEach((digit) => digit.addEventListener("click", onDigitClick));
 
   operators.forEach((operator) =>
@@ -27,14 +29,19 @@ function init() {
     button.addEventListener("click", (e) => e.target.classList.add("pressed"))
   );
   buttons.forEach((button) =>
-    button.addEventListener("transitionend", (e) =>
-      e.target.classList.remove("pressed")
+    button.addEventListener(
+      "transitionend",
+      (e) => {
+        e.target.classList.remove("pressed");
+      },
+      { capture: false }
     )
   );
 
-  displayBox.addEventListener("transitionend", (e) =>
-    e.target.classList.remove("pressed")
-  );
+  displayBox.addEventListener("transitionend", (e) => {
+    if (e.propertyName !== "transform") return;
+    e.target.classList.remove("pressed");
+  });
 }
 
 let add = (a, b) => a + b;
@@ -64,6 +71,7 @@ const operation = {
 };
 
 function onDigitClick(e) {
+  console.log(e.target);
   let digit = e.type == "keydown" ? e.key : e.target.textContent;
   if (operation[operation.current].length < 9) {
     updateOperand(digit);
