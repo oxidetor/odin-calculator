@@ -53,7 +53,6 @@ const operation = {
 };
 
 function onDigitClick(e) {
-  console.log(e.target);
   let digit = e.type == "keydown" ? e.key : e.target.textContent;
   if (operation[operation.current].length < 9) {
     updateOperand(digit);
@@ -126,6 +125,7 @@ function onEqualsClick() {
       updateDisplay("error");
       return;
     } else if (result.toString().length > 9) {
+      console.log("more than 9");
       let precision = 9;
       if (result.toPrecision(precision).includes("-")) precision--;
       if (result.toPrecision(precision).includes(".")) precision--;
@@ -134,6 +134,13 @@ function onEqualsClick() {
           --precision -
           (result.toPrecision(precision).length -
             result.toPrecision(precision).indexOf("+"));
+      }
+      if (+result.toPrecision(precision) < 1) {
+        let zeros = result
+          .toPrecision(precision)
+          .slice(2)
+          .match(/^0*/)[0].length;
+        precision -= zeros;
       }
       operation.left = `${result.toPrecision(precision)}`;
     } else {
