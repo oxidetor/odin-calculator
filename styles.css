@@ -68,13 +68,14 @@ body {
   border: 1px solid purple;
   padding: 3px;
   background-clip: content-box;
-  transition: all 0.2s ease;
+  transition: all 1s ease;
 }
 
 .button:active {
-  transform: scale(1.1);
+  transition: 0s;
   border-color: purple;
-  box-shadow: 0 0 0.2rem purple;
+  box-shadow: 0 0 0.5rem purple;
+  color: red;
 }
 
 .digit {
