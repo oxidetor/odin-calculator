@@ -103,7 +103,6 @@ function onOperatorClick(e) {
 function styleOperatorButton(e) {
   let operators = document.querySelectorAll(".operator");
   operators.forEach((operator) => {
-    console.log(operator.textContent);
     if (operator.textContent == operation.operator) {
       operator.style.backgroundColor = "aqua";
     }
@@ -131,9 +130,11 @@ function onEqualsClick() {
     result = operation.operate();
     resetOperation();
     resetOperatorButtonStyles();
+    displayBox.classList.add("pressed");
 
     if (result == Infinity || result == -Infinity) {
-      operation.left = "*ERROR*";
+      updateDisplay("error");
+      return;
     } else if (result.toString().length > 9) {
       let precision = 9;
       if (result.toPrecision(precision).includes("-")) precision--;
@@ -148,7 +149,6 @@ function onEqualsClick() {
     } else {
       operation.left = `${result}`;
     }
-    displayBox.classList.add("pressed");
     updateDisplay();
   }
 }
@@ -170,7 +170,13 @@ function updateDisplay(mode) {
   let displayBox = document.querySelector(".display-box");
   let output = operation[operation.current];
 
-  displayBox.textContent = mode == "clear" ? "" : `${output}`;
+  displayBox.textContent =
+    mode == "clear" ? "" : mode == "error" ? "*ERROR*" : `${output}`;
+}
+
+function displayMessage(message) {
+  let displayBox = document.querySelector(".display-box");
+  displayBox.textContent = message;
 }
 
 function onClearClick() {
@@ -187,7 +193,6 @@ function resetOperation() {
 }
 
 function onKeyboardInput(e) {
-  console.log(e.key);
   let operators = ["/", "*", "+", "-"];
   let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 
