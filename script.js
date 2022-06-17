@@ -125,7 +125,6 @@ function onEqualsClick() {
       updateDisplay("error");
       return;
     } else if (result.toString().length > 9) {
-      console.log("more than 9");
       let precision = 9;
       if (result.toPrecision(precision).includes("-")) precision--;
       if (result.toPrecision(precision).includes(".")) precision--;
@@ -136,6 +135,7 @@ function onEqualsClick() {
             result.toPrecision(precision).indexOf("+"));
       }
       if (+result.toPrecision(precision) < 1) {
+        precision--;
         let zeros = result
           .toPrecision(precision)
           .slice(2)
