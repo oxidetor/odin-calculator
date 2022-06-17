@@ -146,9 +146,19 @@ function onEqualsClick() {
 function onBackspaceClick() {
   // Do nothing if only left and operator are set
   if (operation.operator == null || operation.right != "") {
-    // Backspace removes entire exponentiation term ("e+X")
+    // Backspace removes positive exponent term
     if (operation[operation.current].slice(-2, -1) == "+") {
-      operation[operation.current] = operation[operation.current].slice(0, -3);
+      operation[operation.current] = operation[operation.current].slice(0, -2);
+    }
+
+    // Backspace removes negative exponent term
+    if (operation[operation.current].slice(-2, -1) == "-") {
+      operation[operation.current] = operation[operation.current].slice(0, -2);
+    }
+
+    // Backspace removes decimal point
+    if (operation[operation.current].slice(-2, -1) == ".") {
+      operation[operation.current] = operation[operation.current].slice(0, -1);
     }
 
     operation[operation.current] = operation[operation.current].slice(0, -1);
