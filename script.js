@@ -53,9 +53,9 @@ const operation = {
         return add(+this.left, +this.right);
       case "-":
         return subtract(+this.left, +this.right);
-      case "*":
+      case "×":
         return multiply(+this.left, +this.right);
-      case "/":
+      case "÷":
         return divide(+this.left, +this.right);
       default:
         break;
@@ -80,7 +80,14 @@ function updateOperand(digit) {
 }
 
 function onOperatorClick(e) {
-  let operator = e.type == "keydown" ? e.key : e.target.textContent;
+  let operator =
+    e.type == "keydown"
+      ? e.key == "*"
+        ? "×"
+        : e.key == "/"
+        ? "÷"
+        : e.key
+      : e.target.textContent;
 
   // Do nothing if the left operand isn't set
   if (operation.left == "") return;
@@ -126,9 +133,8 @@ function onEqualsClick() {
     resetOperatorButtonStyles();
 
     if (result == Infinity || result == -Infinity) {
-      operation.left = "*ERROR";
-    }
-    if (result.toString().length > 9) {
+      operation.left = "*ERROR*";
+    } else if (result.toString().length > 9) {
       let precision = 9;
       if (result.toPrecision(precision).includes("-")) precision--;
       if (result.toPrecision(precision).includes(".")) precision--;
@@ -181,6 +187,7 @@ function resetOperation() {
 }
 
 function onKeyboardInput(e) {
+  console.log(e.key);
   let operators = ["/", "*", "+", "-"];
   let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 

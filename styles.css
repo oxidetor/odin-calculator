@@ -1,3 +1,13 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
 body {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -13,35 +23,35 @@ body {
 
 .main-box {
   margin: auto;
-  border: 1px solid black;
+  border: 3px solid purple;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .display-box {
+  margin: 10px 0px;
   height: 70px;
-  width: 200px;
+  width: 180px;
   flex-grow: 0;
-  border: 1px solid blue;
+  border: 4px double purple;
   display: flex;
   justify-content: end;
   align-items: flex-end;
-  padding: 20px;
-  font-size: 30px;
+  padding: 16px;
+  font-size: 24px;
   overflow: hidden;
   transition: all 0.2s ease;
-  box-sizing: border-box;
 }
 
 .inputs-box {
   display: flex;
   flex-direction: row;
+  border-top: 1px solid purple;
 }
 
 .digits-box {
   width: 150px;
-  box-sizing: border-box;
   display: flex;
   flex-flow: row-reverse wrap;
   justify-content: space-between;
@@ -50,10 +60,10 @@ body {
 .button {
   height: 50px;
   width: 50px;
+  font-size: 20px;
   text-align: center;
   line-height: 44px;
   border: 1px solid purple;
-  box-sizing: border-box;
   padding: 3px;
   background-clip: content-box;
   transition: all 0.2s ease;
@@ -70,6 +80,7 @@ body {
 }
 .equals {
   background-color: lightseagreen;
+  font-size: 30px;
 }
 
 .backspace {
