@@ -24,24 +24,6 @@ function init() {
   clear.addEventListener("click", onClearClick);
 
   window.addEventListener("keydown", onKeyboardInput);
-
-  buttons.forEach((button) =>
-    button.addEventListener("click", (e) => e.target.classList.add("pressed"))
-  );
-  buttons.forEach((button) =>
-    button.addEventListener(
-      "transitionend",
-      (e) => {
-        e.target.classList.remove("pressed");
-      },
-      { capture: false }
-    )
-  );
-
-  displayBox.addEventListener("transitionend", (e) => {
-    if (e.propertyName !== "transform") return;
-    e.target.classList.remove("pressed");
-  });
 }
 
 let add = (a, b) => a + b;
